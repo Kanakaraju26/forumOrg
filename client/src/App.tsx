@@ -3,7 +3,7 @@ import Loginp from "./pages/login";
 import Signup from "./pages/signup";
 import ForgotPassword from "./pages/forgot_password";
 import Otp from "./pages/otp";
-
+import "./App.css";
 
 function App() {
   return (

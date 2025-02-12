@@ -1,0 +1,13 @@
+.auth-btn{
+    background-color: #0400ff;
+    color: #ffffff;
+    border: 1px solid #5b5aa3;
+    padding: 10px 10px;
+    border-radius: 8px;;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.auth-btn:hover{
+    background-color: #853131;
+}

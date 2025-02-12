@@ -1,0 +1,13 @@
+.text-field{
+    padding: 10px;
+    border: none;
+    height: 25px;
+    border-radius: 8px;
+    border : 1px solid #000000;
+    background: transparent;
+    color: #ffffff;
+}
+.text-field:focus{
+    outline: none;
+    border: 1px solid #ffffff;
+}
