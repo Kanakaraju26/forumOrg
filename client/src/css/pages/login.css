@@ -1,0 +1,40 @@
+.login-page{
+    height: 95vh; 
+    background-color: antiquewhite;
+}
+
+.container-form {
+    display: flex;
+    flex-direction: column;  /* Stack elements vertically */
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.name-app{
+    position: absolute;
+    bottom: 10%;
+    right: 10%;
+    font-weight: bold;
+    font-size: 50px;
+    color: rgb(129, 115, 115);
+}
+
+.login-title {
+    margin-bottom: 20px;  
+}
+
+.form-group {
+    margin-bottom: 15px; 
+}
+
+button {
+    margin-top: 10px; 
+    width: 100%; 
+}
+@media screen and (max-width: 768px) {
+    .name-app{
+        font-size: 20px;
+    } 
+}
