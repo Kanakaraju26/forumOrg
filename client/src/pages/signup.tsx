@@ -1,8 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../components/button";
 import Textfield from "../components/Textfield";
+import { useUser } from "../context/userContext";
 
 function Signup() {
+  const { setUserData } = useUser();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -13,6 +18,27 @@ function Signup() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSignups = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: formData.email, password: formData.password }),
+      });
+      
+      const data = await response.json();
+
+      if (response.ok) {
+        setUserData({ email: formData.email, password: formData.password });
+        navigate("/otp"); // Redirect to OTP screen
+      } else {
+        setError(data.message);
+      }
+    } catch (error) {
+      setError("Something went wrong. Please try again.");
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -32,8 +58,8 @@ function Signup() {
       return;
     }
 
-    console.log("Signup successful", formData);
-    setError(""); // Clear error on success
+    // Call signup function
+    handleSignups();
   };
 
   return (
