@@ -1,8 +1,13 @@
 import { useState } from "react";
 import Button from "../components/button";
 import Textfield from "../components/Textfield";
+import { useNavigate } from "react-router-dom";
 
 function ForgotPassword() {
+  const navigate = useNavigate();
+
+  const [message, setMessage] = useState("");
+
   // State to manage email input
   const [formData, setFormData] = useState({ email: "" });
 
@@ -12,9 +17,25 @@ function ForgotPassword() {
   };
 
   // Handle form submission
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); // Prevent page reload
-    console.log("Forgot Password request for:", formData.email);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setMessage("");
+
+    const response = await fetch("http://localhost:5000/api/auth/forgot-password", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData), 
+      credentials: "include",
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      localStorage.setItem("resetEmail", formData.email);
+      alert("OTP sent to your email.");
+      setTimeout(() => navigate("/otp"), 2000);
+    } else {
+      setMessage(data.message || "Error sending OTP");
+    }
   };
 
   return (
@@ -34,6 +55,7 @@ function ForgotPassword() {
             </div>
             <Button name="Proceed" type="submit" />
           </form>
+          {message && <p>{message}</p>} 
         </div>
       </div>
     </div>

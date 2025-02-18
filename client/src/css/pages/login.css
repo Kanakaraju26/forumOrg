@@ -12,6 +12,7 @@
 }
 
 .container-start{
+    max-width: 250px;
     padding: 30px;
     border-radius: 10px;
     border: 1px solid #8a8787;

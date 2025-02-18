@@ -5,7 +5,7 @@ import Textfield from "../components/Textfield";
 import { useUser } from "../context/userContext";
 
 function Signup() {
-  const { setUserData } = useUser();
+  const {  setPassword } = useUser();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -13,6 +13,10 @@ function Signup() {
     password: "",
     confirmPassword: "",
   });
+
+  const gotoLogin = () => { 
+    navigate("/login");
+  }
 
   const [error, setError] = useState("");
 
@@ -25,14 +29,16 @@ function Signup() {
       const response = await fetch("http://localhost:5000/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: formData.email, password: formData.password }),
+        body: JSON.stringify({ email: formData.email}),
+        credentials: "include",
       });
-      
+  
       const data = await response.json();
-
+  
       if (response.ok) {
-        setUserData({ email: formData.email, password: formData.password });
-        navigate("/otp"); // Redirect to OTP screen
+        localStorage.setItem("signupEmail", formData.email); 
+        setPassword(formData.password);
+        navigate("/otp"); 
       } else {
         setError(data.message);
       }
@@ -40,6 +46,7 @@ function Signup() {
       setError("Something went wrong. Please try again.");
     }
   };
+  
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault(); // Prevent page reload
@@ -98,7 +105,7 @@ function Signup() {
             {error && <p className="error-message">{error}</p>}
             <div className="button-group">
               <Button name="Sign Up" type="submit" />
-              <Button name="Already Registered? Login" type="button" />
+              <Button name="Already Registered? Login" type="button"  onClick={gotoLogin}/>
             </div>
           </form>
         </div>

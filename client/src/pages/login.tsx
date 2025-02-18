@@ -2,13 +2,24 @@ import { useState } from "react";
 import Button from "../components/button";
 import Textfield from "../components/Textfield";
 import "../css/pages/login.css";
+import { useNavigate } from "react-router-dom";
 
 function Loginp() {
+  const navigate = useNavigate();
+
   // State to store email, password, and error messages
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  const gotoforgot = () => {
+    navigate("/forgot-password");
+  }
+
+  const gotosignup = () => {
+    navigate("/signup");
+  }
 
   const [error, setError] = useState("");
 
@@ -18,9 +29,9 @@ function Loginp() {
   };
 
   // Handle form submission
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); // Prevent page reload
-    
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
     // Validation
     if (!formData.email.includes("@")) {
       setError("Invalid email address");
@@ -31,8 +42,25 @@ function Loginp() {
       return;
     }
 
-    setError(""); // Clear error on success
-    console.log("Login submitted:", formData);
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+        credentials: "include",
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        navigate("/"); 
+      } else {
+        setError(data.message);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      setError("Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -64,9 +92,9 @@ function Loginp() {
             {error && <p className="error-message">{error}</p>}
 
             <div className="button-group">
-              <Button name="Forgot Password?" type="button" />
+              <Button name="Forgot Password?" type="button" onClick={gotoforgot}/>
               <Button name="Login" type="submit" />
-              <Button name="Not Registered? Sign Up" type="button" />
+              <Button name="Not Registered? Sign Up" type="button" onClick={gotosignup}/>
             </div>
           </form>
         </div>
