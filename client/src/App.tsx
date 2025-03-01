@@ -8,6 +8,7 @@ import Home from "./pages/home";
 import Setpassword from "./pages/set_password";
 import Profile from "./pages/profile";
 import CreatePost from "./pages/creation_post";
+import About from "./pages/about";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/create-post" element={<CreatePost />} />
         <Route path="/otp" element={<Otp />} />
         <Route path="/otp/set-password" element={<Setpassword />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </Router>
   );

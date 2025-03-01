@@ -1,0 +1,36 @@
+.about-container {
+    min-height: 95vh;
+    background-color: #f4f4f4;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .about-section {
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    color: #444;
+  }
+  
+  p, ul {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  ul {
+    list-style-type: disc;
+    margin-left: 20px;
+  }
+  
+  strong {
+    color: #000;
+  }
+  
