@@ -1,0 +1,78 @@
+.profile-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #121212;
+    color: white;
+  }
+  
+  h2, h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .profile-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    width: 300px;
+  }
+  
+  .profile-field label {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  .profile-field input {
+    padding: 10px;
+    font-size: 16px;
+    color: white;
+    background: #333;
+    border: 1px solid #777;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  .error {
+    color: red;
+    font-size: 14px;
+  }
+  
+  .save-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 320px;
+    margin-top: 10px;
+  }
+  
+    .save-btn:hover {
+        background-color: #45a049;
+    }
+  .post-item{
+    .post-container{
+      width: auto;
+      .post-body{
+        text-align: center;
+        color: black;
+      }
+    }
+  }
+
+  .comment-section{
+    text-align: center;
+  }
+
+  .comment-section,h3{
+    color: black;
+  }
+
+  .comment-header,p{
+    color: black;
+  }

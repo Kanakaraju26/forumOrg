@@ -1,11 +1,12 @@
 .text-field{
-    padding: 10px;
-    border: none;
-    height: 25px;
-    border-radius: 8px;
-    border : 1px solid #000000;
-    background: transparent;
-    color: #ffffff;
+    padding: 10px !important;
+    border: none !important;
+    height: 25px !important;
+    border-radius: 8px !important;
+    border : 1px solid #000000 !important;
+    background: transparent !important;
+    color: #ffffff !important;
+    width: 100% !important;
 }
 .text-field:focus{
     outline: none;

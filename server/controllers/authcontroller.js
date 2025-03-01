@@ -17,6 +17,21 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+const generateUniqueUsername = async () => {
+  let username;
+  let userExists = true;
+
+  while (userExists) {
+    username = "user" + Math.floor(1000 + Math.random() * 9000); 
+    const existingUser = await User.findOne({ username }); 
+    if (!existingUser) {
+      userExists = false;
+    }
+  }
+
+  return username;
+};
+
 // Signup function
 export const signup = async (req, res) => {
   try {
@@ -70,6 +85,7 @@ export const verifyOtp = async (req, res) => {
     const newUser = new User({
       email,
       password: hashedPassword,
+      username: await generateUniqueUsername(),
     });
 
     await newUser.save(); // Save the user to the database

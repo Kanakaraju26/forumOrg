@@ -3,6 +3,8 @@ import { createContext, useContext, useState, ReactNode } from "react";
 // Define user data type
 interface UserData {
   email: string;
+  username: string;
+  _id: string;
 }
 
 // Define context type
@@ -33,10 +35,10 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         const user = await response.json();
         setUserData(user);
       } else {
+        console.clear();        
         setUserData(null);
       }
     } catch (error) {
-      console.error("Error fetching user:", error);
       setUserData(null);
     }
   };

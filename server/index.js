@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
 import authRoutes from "./routes/auth.js";
+import postRoutes from "./routes/post.js";
 import cookieParser from "cookie-parser";
 
 dotenv.config();
@@ -18,7 +19,8 @@ app.use(
   })
 );
 app.use("/api/auth", authRoutes);
-
+app.use ("/api/post", postRoutes);
+app.use("/uploads", express.static("./uploads"));
 
 mongoose.connect(process.env.MONGO_URI).then(() => {
     console.log("MongoDB Connected");

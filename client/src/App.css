@@ -1,7 +1,11 @@
 body {
     background-image: linear-gradient(to left, #283c46  0%, #0a2342  100%);
     margin: 0;
-    padding: 0;
+    padding-top: 0;
     font-family: Arial, sans-serif;
-  }
-  
+
+}
+
+html{
+    scrollbar-width: none;
+}

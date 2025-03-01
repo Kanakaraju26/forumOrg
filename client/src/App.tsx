@@ -7,6 +7,7 @@ import "./App.css";
 import Home from "./pages/home";
 import Setpassword from "./pages/set_password";
 import Profile from "./pages/profile";
+import CreatePost from "./pages/creation_post";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/set-password" element={<Setpassword />} />
-        
+        <Route path="/create-post" element={<CreatePost />} />
         <Route path="/otp" element={<Otp />} />
         <Route path="/otp/set-password" element={<Setpassword />} />
       </Routes>

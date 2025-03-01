@@ -1,0 +1,153 @@
+/* Home Page Styling */
+.homeComponent {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+    text-align: center;
+    scroll-behavior: auto ;
+    scrollbar-width: none;
+  }
+
+ .homeComponent {
+  overflow: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE & Edge */
+}
+
+.homeComponent::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+  
+  /* Navbar */
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #333;
+    color: white;
+    position: fixed;
+    top: 0;
+    width: -webkit-fill-available;
+    z-index: 100;
+  }
+  
+  /* Logo */
+  .nav-logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  /* Navigation Links */
+  .nav-links {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  /* Nav Items */
+  .nav-item {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+  }
+  
+  .nav-item:hover {
+    color: #ffcc00;
+  }
+  
+  /* Search Input */
+  .nav-search {
+    width: auto !important;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    background-color: #666;
+    color: white;
+    font-size: 14px;
+  }
+  
+  .nav-search::placeholder {
+    color: #ccc;
+  }
+  
+  /* Post Button */
+  .nav-button {
+    width: auto !important;
+    border: none;
+    border-radius: 4px;
+    background-color: #ff6600;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+  }
+  
+  .nav-button:hover {
+    background-color: #974a37;
+  }
+  
+  /* Mobile Menu Icon */
+  .menu-icon {
+    font-size: 28px;
+    cursor: pointer;
+    display: none;
+  }
+  
+  /* Home Page Content */
+  .home-content {
+    margin-top: 100px;
+    font-size: 18px;
+  }
+
+  .post-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .menu-icon {
+      display: block;
+    }
+  
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      background-color: #222;
+      padding: 10px 0;
+    }
+  
+    .nav-links.open {
+      display: flex;
+    }
+  
+    .nav-item {
+      padding: 10px;
+    }
+  
+    .nav-search {
+      width: 90%;
+      margin: 5px auto;
+    }
+  
+    .nav-post-button {
+      width: 90%;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .home-posts{
+      width: auto !important;
+    }
+  }
+  
