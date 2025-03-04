@@ -24,8 +24,6 @@ export const createPost = async (user: string, title: string, content: string, i
         content,
         image: imageUrl || null, // Ensure image is handled correctly
       });
-  
-      console.log("Sending post data:", body); 
 
   const response = await fetch(`${API_URL}/create`, {
     method: "POST",

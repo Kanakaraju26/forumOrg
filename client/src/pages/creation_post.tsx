@@ -26,7 +26,18 @@ const CreatePost = () => {
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setPost({ ...post, image: e.target.files[0] });
+      const file = e.target.files[0];
+  
+      // Allowed image types
+      const allowedTypes = ["image/jpeg", "image/png", "image/gif", "image/webp"];
+  
+      if (!allowedTypes.includes(file.type)) {
+        alert("Only image files (JPG, PNG, GIF, WEBP) are allowed.");
+        e.target.value = ""; // Reset input field
+        return;
+      }
+  
+      setPost({ ...post, image: file });
     }
   };
 
@@ -54,8 +65,9 @@ const CreatePost = () => {
         post.content|| "",
         imageUrl 
       );
-
+      
       alert("Post created successfully! Redirecting to home page...");
+
       setTimeout(() => {
         navigate("/");
       }, 2000);

@@ -180,7 +180,7 @@ export const addComment = async (req, res) => {
         res.status(201).json({
             message: "Comment added",
             comment: {
-                _id: latestComment._id,  // ✅ Corrected from undefined `addedComment`
+                _id: latestComment._id,
                 user: {
                     _id: latestComment.user._id,
                     username: latestComment.user.username || "Unknown User" // ✅ Prevent errors if username is missing
@@ -234,21 +234,22 @@ export const fetchComments = async (req, res) => {
 
 export const fetchSinglePost = async (req, res) => {
     try {
-        const { id,password } = req.query; 
+        const { username, password } = req.query; 
 
-        if(password !== "123456"){
-            return res.status(401).json({ message: "Unauthorized" });
-        }
-        if (!id || !mongoose.Types.ObjectId.isValid(id)) {
-            return res.status(400).json({ message: "Invalid or missing post ID" });
-        }
+    if (password !== "123456") {
+        return res.status(401).json({ message: "Unauthorized" });
+    }
 
-        const post = await Post.findById(id).populate("user", "username email");
+    if (!username) {
+        return res.status(400).json({ message: "Username is required" });
+    }
 
-        if (!post) return res.status(404).json({ message: "Post not found" });
+    const posts = await Post.find({ username }).populate("user", "username email");
 
-        res.json(post);
+    if (!posts.length) return res.status(404).json({ message: "No posts found for this username" });
+
+    res.json(posts);
     } catch (error) {
         res.status(500).json({ message: "Server error", error });
     }
-}
+};

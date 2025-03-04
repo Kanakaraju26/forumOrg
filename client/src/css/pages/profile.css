@@ -1,8 +1,6 @@
 .profile-container {
     display: flex;
-    align-items: center;
     gap: 20px;
-    justify-content: center;
     min-height: 100vh;
     background-color: #121212;
     color: white;
@@ -75,4 +73,27 @@
 
   .comment-header,p{
     color: black;
+  }
+
+
+  @media screen and (max-width:750px) {
+    .profile-container{
+      display: block;
+    }
+    .profile-section{
+      text-align: center;
+      display: grid;
+      place-items: center;
+    }
+    .profile-field{
+      margin-top: 10px;
+      width: 200px;
+    }
+    .profile-section h2{
+      margin: 0px;
+      width: 100%;
+    }
+    .post-container{
+      width: auto;
+    }
   }

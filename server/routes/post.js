@@ -17,6 +17,6 @@ router.put("/:id/like",authMiddleware,likeAndUnlike);
 router.post("/:id/comment",authMiddleware,addComment);
 router.delete("/:postId/comment/:commentId",authMiddleware,deleteComment);
 router.get("/:id/comments",fetchComments);
-router.get("/only",fetchSinglePost);
+router.get("/only",authMiddleware,fetchSinglePost);
 
 export default router;

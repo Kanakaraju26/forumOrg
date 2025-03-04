@@ -26,9 +26,15 @@ const Profile = () => {
   const [isEditingPost, setIsEditingPost] = useState<string | null>(null);
   const [editedPost, setEditedPost] = useState<PostType | null>(null);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchUser();
+    const fetchData = async () => {
+      await fetchUser(); 
+      setLoading(false); 
+    };
+  
+    fetchData();
   }, []);
 
   const fetchUserPosts = useCallback(async () => {
@@ -50,17 +56,17 @@ const Profile = () => {
   }, [userData]);
 
   useEffect(() => {
-    if (!userData) {
+    if (!loading && !userData) {
       navigate("/");
     } else {
       setUsername(userData?.username || "");
       fetchUserPosts();
     }
-  }, [userData, navigate, fetchUserPosts]);
-
+  }, [userData, navigate, loading, fetchUserPosts]);
+  
   const handleUpdateUsername = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/user/update-username", {
+      const response = await fetch("http://localhost:5000/api/auth/update-username", {
         method: "PUT",
         credentials: "include",
         headers: {
@@ -68,11 +74,18 @@ const Profile = () => {
         },
         body: JSON.stringify({ username }),
       });
-
+      
       if (response.ok) {
-        fetchUser();
+        await fetchUser();  
+        await fetchUserPosts(); 
         setIsEditingUsername(false);
+      } else if (response.status === 400) {
+        const data = await response.json();
+        alert(data.message);  
+      } else {
+        alert("Something went wrong. Please try again."); 
       }
+      
     } catch (error) {
       console.error("Error updating username", error);
     }
@@ -181,6 +194,10 @@ const Profile = () => {
       console.error("Error updating post:", error);
     }
   };
+
+  if (loading) {
+    return <div>Loading...</div>; // Show a loading indicator while fetching user data
+  }
 
   return (
     <div className="profile-container">
