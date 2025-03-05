@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "../css/components/post.css";
 import { useUser } from "../context/userContext";
 import CommentSection from "./comment";
+import { API_BASE_URL } from "../config";
 
 interface Comment {
   _id: string;
@@ -27,7 +28,6 @@ const Post = ({ id, user, content, image, likes, title, date }: PostProps) => {
   const [isLiked, setIsLiked] = useState(likes.includes(userId));
   const [postComments, setPostComments] = useState<Comment[]>([]); // ✅ Fetch comments explicitly
   const [showComments, setShowComments] = useState(false); // ✅ Show comments state
-
   useEffect(() => {
     fetchUser();
   }, []);
@@ -39,7 +39,7 @@ const Post = ({ id, user, content, image, likes, title, date }: PostProps) => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/post/${id}/comments`);
+        const response = await fetch(`${API_BASE_URL}/post/${id}/comments`);
         const data = await response.json();
         setPostComments(data);
       } catch (error) {
@@ -58,7 +58,7 @@ const Post = ({ id, user, content, image, likes, title, date }: PostProps) => {
       setIsLiked(newLikedState);
       setLikeCount((prev) => (newLikedState ? prev + 1 : prev - 1));
 
-      const response = await fetch(`http://localhost:5000/api/post/${id}/like`, {
+      const response = await fetch(`${API_BASE_URL}/post/${id}/like`, {
         method: "PUT",
         credentials: "include",
       });
@@ -80,7 +80,7 @@ const Post = ({ id, user, content, image, likes, title, date }: PostProps) => {
     if (text.trim() === "") return;
 
     try {
-      const response = await fetch(`http://localhost:5000/api/post/${postId}/comment`, {
+      const response = await fetch(`${API_BASE_URL}/post/${postId}/comment`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -107,7 +107,7 @@ const Post = ({ id, user, content, image, likes, title, date }: PostProps) => {
   // ✅ Delete Comment Handler
   const handleDeleteComment = async (postId: string, commentId: string) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/post/${postId}/comment/${commentId}`, {
+      const response = await fetch(`${API_BASE_URL}/post/${postId}/comment/${commentId}`, {
         method: "DELETE",
         credentials: "include",
       });

@@ -4,6 +4,7 @@ import Button from "../components/button";
 import "../css/pages/otp.css";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../context/userContext";
+import { API_BASE_URL } from "../config";
 
 const Otp = () => {
   const { password, clearPassword } = useUser(); // Call the hook here
@@ -33,7 +34,7 @@ const Otp = () => {
       let response;
       if (resetEmail) {
         // Forgot Password OTP Verification
-        response = await fetch("http://localhost:5000/api/auth/verify-forgot-otp", {
+        response = await fetch(`${API_BASE_URL}/auth/verify-forgot-otp`, {
           method: "POST",
           headers: { "Content-Type": "application/json" }, 
           body: JSON.stringify({ email: resetEmail, otp: otpCode }),
@@ -51,7 +52,7 @@ const Otp = () => {
         let email = localStorage.getItem("signupEmail");
 
         // Pass password from context here
-        const response = await fetch("http://localhost:5000/api/auth/verify-otp", {
+        const response = await fetch(`${API_BASE_URL}/auth/verify-otp`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email: email, otp: otpCode, password: password }),

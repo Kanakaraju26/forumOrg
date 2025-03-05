@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, ReactNode } from "react";
+import { API_BASE_URL } from "../config";
 
 // Define user data type
 interface UserData {
@@ -27,7 +28,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   // Fetch user from API (instead of localStorage)
   const fetchUser = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/auth/profile", {
+      const response = await fetch(`${API_BASE_URL}/auth/profile`, {
         credentials: "include", 
       });
 
@@ -46,7 +47,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   // Logout function
   const logoutUser = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/auth/logout", {
+      const response = await fetch("${API_BASE_URL}/auth/logout", {
         method: "POST",
         credentials: "include",
       });

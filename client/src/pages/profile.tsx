@@ -3,6 +3,7 @@ import { useUser } from "../context/userContext";
 import { useNavigate } from "react-router-dom";
 import "../css/pages/profile.css";
 import Post from "../components/post";
+import { API_BASE_URL } from "../config";
 
 interface PostType {
   _id: string;
@@ -41,7 +42,7 @@ const Profile = () => {
     try {
       if (!userData) return;
 
-      const response = await fetch("http://localhost:5000/api/post/user", {
+      const response = await fetch(`${API_BASE_URL}/post/user`, {
         method: "GET",
         credentials: "include",
       });
@@ -66,7 +67,7 @@ const Profile = () => {
   
   const handleUpdateUsername = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/auth/update-username", {
+      const response = await fetch(`${API_BASE_URL}/auth/update-username`, {
         method: "PUT",
         credentials: "include",
         headers: {
@@ -93,7 +94,7 @@ const Profile = () => {
 
   const handleUpdatePassword = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/user/update-password", {
+      const response = await fetch(`${API_BASE_URL}/user/update-password`, {
         method: "PUT",
         credentials: "include",
         headers: {
@@ -113,7 +114,7 @@ const Profile = () => {
 
   const handleDeletePost = async (postId: string) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/post/${postId}`, {
+      const response = await fetch(`{API_BASE_URL}/post/${postId}`, {
         method: "DELETE",
         credentials: "include",
       });
@@ -163,8 +164,7 @@ const Profile = () => {
     }
 
     try {
-      const response = await fetch(
-        `http://localhost:5000/api/post/${editedPost._id}`,
+      const response = await fetch(`${API_BASE_URL}/post/${editedPost._id}`,
         {
           method: "PUT",
           credentials: "include",

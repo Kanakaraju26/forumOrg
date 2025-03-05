@@ -3,6 +3,7 @@ import Chat from "../components/chat";
 import { useUser } from "../context/userContext";
 import ChatList from "../components/chatlist";
 import "../css/pages/chat_page.css"; 
+import { API_BASE_URL } from "../config";
 
 const Messages = () => {
   const { userData, fetchUser } = useUser();
@@ -20,8 +21,8 @@ const Messages = () => {
   useEffect(() => {
     if (!currentUserId) return; 
 
-    fetch("http://localhost:5000/api/auth/users")
-      .then((res) => res.json())
+    fetch(`${API_BASE_URL}/auth/users`)     
+     .then((res) => res.json())
       .then((data) => {
         const filteredData = data.filter((user: { _id: string }) => user._id !== currentUserId);
         setUsers(filteredData);

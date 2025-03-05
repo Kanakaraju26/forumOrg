@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { io } from "socket.io-client";
 import "../css/components/chat.css"; // Import the separated CSS file
+import { API_BASE_URL } from "../config";
 
 const socket = io("http://localhost:5000", { transports: ["websocket"] });
 
@@ -17,8 +18,9 @@ const Chat: React.FC<ChatProps> = ({ userId, receiverId }) => {
 
   // ✅ Fetch receiver's name when receiverId changes
   useEffect(() => {
+    
     if (!receiverId) return;
-    fetch(`http://localhost:5000/api/auth/users/`) // Adjust API route as needed
+    fetch(`${API_BASE_URL}/auth/users/`) // Adjust API route as needed
       .then((res) => res.json())
       .then((data) =>  {
         const foundUser = data.find((user: { _id: string }) => user._id === receiverId);
@@ -30,7 +32,7 @@ const Chat: React.FC<ChatProps> = ({ userId, receiverId }) => {
   // ✅ Fetch old messages when receiverId changes
   useEffect(() => {
     if (!receiverId) return;
-    fetch(`http://localhost:5000/api/chat/messages/${userId}/${receiverId}`)
+    fetch(`${API_BASE_URL}/chat/messages/${userId}/${receiverId}`)
       .then((res) => res.json())
       .then((data) => {
         setMessages(data);

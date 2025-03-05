@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../components/button";
 import Textfield from "../components/Textfield";
 import { useUser } from "../context/userContext";
+import { API_BASE_URL } from "../config";
 
 function Signup() {
   const {  setPassword } = useUser();
@@ -26,7 +27,7 @@ function Signup() {
 
   const handleSignups = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/auth/signup", {
+      const response = await fetch(`${API_BASE_URL}/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: formData.email}),

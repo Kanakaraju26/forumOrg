@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import "../css/components/chatlist.css";
+import { API_BASE_URL } from "../config";
+
 
 interface ChatListProps {
   userId: string;
@@ -10,10 +12,10 @@ const ChatList: React.FC<ChatListProps> = ({ userId, selectChat }) => {
   const [recentChats, setRecentChats] = useState<{ sender: string; receiver: string }[]>([]);
   const [users, setUsers] = useState<{ [key: string]: string }>({});
   const [selectedChatId, setSelectedChatId] = useState<string | null>(null); // Fixed
-
+  
   // Fetch users
   useEffect(() => {
-    fetch("http://localhost:5000/api/auth/users")
+    fetch(`${API_BASE_URL}/auth/users`)
       .then((res) => res.json())
       .then((data) => {
         const usersMap: { [key: string]: string } = {};
@@ -27,7 +29,7 @@ const ChatList: React.FC<ChatListProps> = ({ userId, selectChat }) => {
 
   // Fetch recent chats
   useEffect(() => {
-    fetch(`http://localhost:5000/api/chat/recent-chats/${userId}`)
+    fetch(`${API_BASE_URL}/chat/recent-chats/${userId}`)
       .then((res) => res.json())
       .then((data) => {
         const uniqueUsers = new Set<string>();

@@ -1,4 +1,6 @@
-const API_URL = "http://localhost:5000/api/post"; 
+import { API_BASE_URL } from "../config";
+
+const API_URL = "${API_BASE_URL}/post"; 
 
 // Upload Image
 export const uploadImage = async (file: File): Promise<string> => {
