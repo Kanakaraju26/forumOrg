@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://letstalk-forum.netlify.app/",
     credentials: true,
   })
 );
@@ -45,7 +45,7 @@ app.get("/", (req, res) => {
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://letstalk-forum.netlify.app/",
     credentials: true,
     methods: ["GET", "POST"],
   },

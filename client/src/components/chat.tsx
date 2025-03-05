@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 import "../css/components/chat.css"; // Import the separated CSS file
 import { API_BASE_URL } from "../config";
 
-const socket = io("http://localhost:5000", { transports: ["websocket"] });
+const socket = io("https://forumorg.onrender.com", { transports: ["websocket"] });
 
 interface ChatProps {
   userId: string;
