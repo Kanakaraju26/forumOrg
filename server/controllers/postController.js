@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import Post from "../models/Post.js";
+import Post from "../models/post.js";
 import User from "../models/user.js";
 import mongoose from "mongoose";
 
