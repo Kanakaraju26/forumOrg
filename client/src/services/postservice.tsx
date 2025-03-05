@@ -20,12 +20,7 @@ export const uploadImage = async (file: File): Promise<string> => {
 
 // Create a Post
 export const createPost = async (user: string, title: string, content: string, imageUrl?: string) => {
-    const body = JSON.stringify({
-        user,
-        title,
-        content,
-        image: imageUrl || null, // Ensure image is handled correctly
-      });
+   
 
   const response = await fetch(`${API_URL}/create`, {
     method: "POST",
