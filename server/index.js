@@ -24,10 +24,13 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "https://letstalk-forum.netlify.app/",
+    origin: ["http://localhost:3000", "https://letstalk-forum.netlify.app"],  // Remove trailing slash
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allow all methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allow necessary headers
   })
 );
+
 
 // Serve static uploads
 app.use("/uploads", express.static("./uploads"));
@@ -45,9 +48,9 @@ app.get("/", (req, res) => {
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://letstalk-forum.netlify.app/",
+    origin: ["http://localhost:3000", "https://letstalk-forum.netlify.app"],  // Remove trailing slash
     credentials: true,
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
   },
 });
 
