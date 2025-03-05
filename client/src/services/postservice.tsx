@@ -1,6 +1,6 @@
 import { API_BASE_URL } from "../config";
 
-const API_URL = "${API_BASE_URL}/post"; 
+const API_URL = `${API_BASE_URL}/post`; 
 
 // Upload Image
 export const uploadImage = async (file: File): Promise<string> => {
@@ -49,6 +49,7 @@ export const fetchPosts = async () => {
 
 // Delete a Post
 export const deletePost = async (postId: string) => {
+
   const response = await fetch(`${API_URL}/${postId}`, {
     method: "DELETE",
   });

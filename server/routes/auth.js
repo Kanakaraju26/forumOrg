@@ -11,7 +11,7 @@ import {
 import authMiddleware, { verifyToken } from "../middleware/authMiddleware.js";
 import User from "../models/user.js"; 
 import bcrypt from "bcrypt"; 
-import Post from "../models/Post.js";
+import Post from "../models/post.js";
 
 const router = Router();
 
